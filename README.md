@@ -1,8 +1,6 @@
 # Coronavirus report
-
-
-# Install guide
-
+Resource by https://covid19api.com/
+# Installation guide
 ### `yarn`
 and then
 ### `yarn start`
