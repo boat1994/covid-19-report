@@ -9,11 +9,9 @@ import Error from '../components/Error'
 import GlobalReport from '../components/GlobalReport'
 import CountryTable from '../components/CountryTable'
 
-
 export default function Dashboard() {
 
     const { setStatistic } = useContext(StatisticContext)
-
     const [loading, setLoading] = useState(true)
     const [ apiError, setApiError ] = useState(false)
 
