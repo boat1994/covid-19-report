@@ -14,7 +14,7 @@ export default function CountryTable() {
 
     const filteredCountries = countries.filter(country => {
         return keyword ? country.Country.toLowerCase().includes(keyword.toLowerCase()) : true
-    }).map(country => ({...country, id:country.ID}))
+    }).map(country => ({...country, id: country.ID}))
     
     return (
         <Grid container justify="center" className={classes.container}> 
@@ -74,7 +74,8 @@ const sortSettings = [
 
 const columns = [
     {
-        field: 'id', hide: true
+        field: 'id', 
+        hide: true
     },
     {
         field: 'Country', 

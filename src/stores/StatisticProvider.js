@@ -21,7 +21,6 @@ const setStatistic = (state, payload) => {
         global: payload.Global,
         countries: payload.Countries
     }
-
 }
 
 export const StatisticProvider = ({children}) => {
