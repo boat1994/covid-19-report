@@ -1,21 +1,31 @@
-import React, {useContext} from 'react'
-import moment from 'moment-timezone'
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import React, { useContext } from "react"
+import moment from "moment-timezone"
+import { makeStyles } from "@material-ui/core/styles"
+import Paper from "@material-ui/core/Paper"
+import Grid from "@material-ui/core/Grid"
 
-import { StatisticContext } from '../stores/StatisticProvider'
+import { StatisticContext } from "../stores/StatisticProvider"
 
-export default function GlobalReport () {
+export default function GlobalReport() {
+    const {
+        statistic: { global },
+    } = useContext(StatisticContext)
+    const classes = useStyles()
 
-    const {statistic: {global}} = useContext(StatisticContext)
-    const classes = useStyles();
-    
     return (
-        <Grid container justify="center" spacing={3} className={classes.container}>
+        <Grid
+            container
+            justify='center'
+            spacing={3}
+            className={classes.container}>
             <Grid item xs={12} className={classes.header}>
-                <div className={classes.title}> COVID-19 CORONAVIRUS PANDEMIC </div>
-                <div className={classes.subTitle}>Last updated: {getDate(global.Date)}</div>
+                <div className={classes.title}>
+                    {" "}
+                    COVID-19 CORONAVIRUS PANDEMIC{" "}
+                </div>
+                <div className={classes.subTitle}>
+                    Last updated: {getDate(global.Date)}
+                </div>
             </Grid>
             <Grid item md={6} xs={12}>
                 <Paper className={classes.information}>
@@ -76,7 +86,7 @@ export default function GlobalReport () {
 }
 
 const getDate = (dateStr) => {
-    return moment(dateStr).tz('GMT').format('MMMM Do YYYY, h:mm A z')
+    return moment(dateStr).tz("GMT").format("MMMM Do YYYY, h:mm A z")
 }
 
 const formattedNumber = (number) => {
@@ -85,33 +95,33 @@ const formattedNumber = (number) => {
 
 const useStyles = makeStyles(() => ({
     information: {
-        backgroundColor: '#424242',
-        color: '#FFFF',
-        fontSize: '2rem',
-        padding: '1vw',
-        textAlign: 'center'
+        backgroundColor: "#424242",
+        color: "#FFFF",
+        fontSize: "2rem",
+        padding: "1vw",
+        textAlign: "center",
     },
     container: {
-        paddingTop: '1vw'
+        paddingTop: "1vw",
     },
     title: {
-        textAlign: 'center',
-        fontSize: '3rem',
+        textAlign: "center",
+        fontSize: "3rem",
     },
     subTitle: {
-        textAlign: 'center',
-        fontSize: '2rem',
+        textAlign: "center",
+        fontSize: "2rem",
     },
     header: {
-        paddingTop: '1rem'
+        paddingTop: "1rem",
     },
     textConfirmed: {
-        color: "yellow"
+        color: "yellow",
     },
     textDeaths: {
-        color: "red"
+        color: "red",
     },
     textRecovered: {
-        color: "green"
-    }
-}));
+        color: "green",
+    },
+}))

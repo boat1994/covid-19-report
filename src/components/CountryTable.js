@@ -1,51 +1,56 @@
-import React, {useContext, useState} from 'react'
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import { StatisticContext } from '../stores/StatisticProvider'
-import { DataGrid } from '@material-ui/data-grid';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import React, { useContext, useState } from "react"
+import Grid from "@material-ui/core/Grid"
+import { makeStyles } from "@material-ui/core/styles"
+import { StatisticContext } from "../stores/StatisticProvider"
+import { DataGrid } from "@material-ui/data-grid"
+import Paper from "@material-ui/core/Paper"
+import TextField from "@material-ui/core/TextField"
 
 export default function CountryTable() {
-
-    const {statistic: {countries}} = useContext(StatisticContext)
+    const {
+        statistic: { countries },
+    } = useContext(StatisticContext)
     const [keyword, setKeyword] = useState("")
-    const classes = useStyles();
+    const classes = useStyles()
 
-    const filteredCountries = countries.filter(country => {
-        return keyword ? country.Country.toLowerCase().includes(keyword.toLowerCase()) : true
-    }).map(country => ({...country, id: country.ID}))
-    
+    const filteredCountries = countries
+        .filter((country) => {
+            return keyword
+                ? country.Country.toLowerCase().includes(keyword.toLowerCase())
+                : true
+        })
+        .map((country) => ({ ...country, id: country.ID }))
+
     return (
-        <Grid container justify="center" className={classes.container}> 
+        <Grid container justify='center' className={classes.container}>
             <Grid item xs={12}>
                 <Paper className={classes.tableContainer}>
                     <Grid item xs={12} md={4}>
-                        <TextField 
+                        <TextField
                             className={classes.searchInput}
-                            onChange={(e) => setKeyword(e.target.value)}  
-                            label="Search by country name..." 
-                            type="search"
-                            variant="outlined"
+                            onChange={(e) => setKeyword(e.target.value)}
+                            label='Search by country name...'
+                            type='search'
+                            variant='outlined'
                             InputLabelProps={{
                                 classes: {
-                                root: classes.textLabel,
-                                focused: classes.focused
+                                    root: classes.textLabel,
+                                    focused: classes.focused,
                                 },
                             }}
                             InputProps={{
                                 className: classes.textLabel,
                                 classes: {
-                                notchedOutline: classes.notchedOutline
-                                }
+                                    notchedOutline: classes.notchedOutline,
+                                },
                             }}
-                        /> 
+                        />
                     </Grid>
                     <Grid xs={12} className={classes.tableBody}>
                         <DataGrid
-                            rows={filteredCountries} 
-                            columns={columns} 
-                            pageSize={10} 
+                            rows={filteredCountries}
+                            columns={columns}
+                            pageSize={10}
                             disableColumnMenu
                             sortModel={sortSettings}
                         />
@@ -57,7 +62,8 @@ export default function CountryTable() {
 }
 
 const numberSetting = {
-    valueFormatter: (param) => param.value ?  param.value.toLocaleString() : "Unreported",
+    valueFormatter: (param) =>
+        param.value ? param.value.toLocaleString() : "Unreported",
     sortComparator: (v1, v2, cellParams1, cellParams2) => {
         if (cellParams1.value && cellParams2.value) {
             return cellParams1.value - cellParams2.value
@@ -67,69 +73,69 @@ const numberSetting = {
 
 const sortSettings = [
     {
-      field: 'TotalConfirmed',
-      sort: 'desc',
+        field: "TotalConfirmed",
+        sort: "desc",
     },
-  ]
+]
 
 const columns = [
     {
-        field: 'id', 
-        hide: true
+        field: "id",
+        hide: true,
     },
     {
-        field: 'Country', 
-        headerName: 'Country',
+        field: "Country",
+        headerName: "Country",
         sortable: false,
         width: 250,
     },
     {
-        type: 'number',
-        field: 'TotalConfirmed', 
-        headerName: 'Total Confirmed',
+        type: "number",
+        field: "TotalConfirmed",
+        headerName: "Total Confirmed",
         width: 200,
-        ...numberSetting
+        ...numberSetting,
     },
     {
-        type: 'number',
-        field: 'TotalDeaths', 
-        headerName: 'Total Deaths',
+        type: "number",
+        field: "TotalDeaths",
+        headerName: "Total Deaths",
         width: 200,
-        ...numberSetting
+        ...numberSetting,
     },
     {
-        type: 'number',
-        field: 'TotalRecovered', 
-        headerName: 'Total Recovered',
+        type: "number",
+        field: "TotalRecovered",
+        headerName: "Total Recovered",
         width: 200,
-        ...numberSetting
+        ...numberSetting,
     },
 ]
 
 const useStyles = makeStyles(() => ({
     container: {
-        paddingTop: '1vw'
+        paddingTop: "1vw",
     },
     tableContainer: {
-        backgroundColor: '#424242',
-        padding: '1vw',
+        backgroundColor: "#424242",
+        padding: "1vw",
     },
     tableBody: {
-        height: '700px'
+        height: "700px",
     },
     searchInput: {
-        color: 'white',
-        paddingBottom: '1vw',
-        width: "100%"
+        color: "white",
+        paddingBottom: "1vw",
+        width: "100%",
     },
     textLabel: {
-        color : 'white'
-      },
+        color: "white",
+    },
     notchedOutline: {
-        borderWidth: '1px',
-        borderColor: 'white !important',
+        borderWidth: "1px",
+        borderColor: "white !important",
     },
     focused: {
-        color: 'white !important'
-    }
-}));
+        color: "white !important",
+    },
+}))
